@@ -3,7 +3,7 @@ import Sensor from "./Sensor";
 
 const SensorBox = () => {
   const [myValue, setMyValues] = useState([]);
-  console.log(domain);
+
 
   useEffect(() => {
     async function getData() {
