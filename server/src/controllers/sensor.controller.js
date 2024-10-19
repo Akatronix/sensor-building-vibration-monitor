@@ -106,7 +106,7 @@ async function deleteSensor(req, res) {
     if (!data) return res.status(404).send({ message: "sensor is not found!" });
     await data.delete;
 
-    fs.unlink(path.join(__dirname, "..", "logs", data.info), (err) => {
+    fs.unlink(path.join(__dirname, "..", "holder", data.info), (err) => {
       if (err) {
         console.error("Error deleting file:", err);
         return;
@@ -131,7 +131,7 @@ async function downloadFile(req, res) {
   if (!data) return res.status(404).send({ message: "sensor is not found!" });
   await data.delete;
 
-  const filePath = path.join(__dirname, "..", "logs", data.info);
+  const filePath = path.join(__dirname, "..", "holder", data.info);
 
   // Check if the file exists
   fs.access(filePath, fs.constants.F_OK, (err) => {
@@ -143,7 +143,7 @@ async function downloadFile(req, res) {
       if (err) {
         console.log("Error while sending file:", err);
       }
-      fs.unlink(path.join(__dirname, "..", "logs", data.info), (err) => {
+      fs.unlink(path.join(__dirname, "..", "holder", data.info), (err) => {
         if (err) {
           console.error("Error deleting file:", err);
           return;

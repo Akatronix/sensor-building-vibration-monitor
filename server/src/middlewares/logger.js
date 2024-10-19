@@ -10,11 +10,11 @@ async function Logger(file, data) {
   const message = `${filename}\t\tx:${x}  y:${y}  z:${z}\t\t${DateTime}\t\t${id}\n`;
 
   try {
-    if (!fs.existsSync(path.join(__dirname, "..", "logs"))) {
-      await fsPromise.mkdir(path.join(__dirname, "..", "logs"));
+    if (!fs.existsSync(path.join(__dirname, "..", "holder"))) {
+      await fsPromise.mkdir(path.join(__dirname, "..", "holder"));
     }
     await fsPromise.appendFile(
-      path.join(__dirname, "..", "logs", file),
+      path.join(__dirname, "..", "holder", file),
       message
     );
   } catch (error) {
