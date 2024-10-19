@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.loading {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 5px solid #75e1ff;
+  /* animation: load 1 infinite ease; */
+  animation: load 1s infinite ease-in-out;
+  margin-bottom: 20px;
+}
+/* .loading .block {
+  content: "";
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 20;
+  background: red;
+} */
+
+@keyframes load {
+  0% {
+    width: 60px;
+    height: 60px;
+  }
+  20% {
+    width: 80px;
+    height: 80px;
+  }
+  40% {
+    width: 100px;
+    height: 100px;
+  }
+  60% {
+    width: 80px;
+    height: 80px;
+  }
+  80% {
+    width: 60px;
+    height: 60px;
+  }
+  100% {
+    width: 0px;
+    height: 0px;
+  }
+}
