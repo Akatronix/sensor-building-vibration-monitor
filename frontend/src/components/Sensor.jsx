@@ -5,7 +5,7 @@ import { HiFolderDownload } from "react-icons/hi";
 const Sensor = ({ x, y, z, id, name, info }) => {
   async function deleteSensor(id) {
     try {
-      await axios.delete(`http://localhost:3000/sensor/delete/${id}`);
+      await axios.delete(`https://sensor-building-vibration-monitor.vercel.app/sensor/delete/${id}`);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -14,7 +14,7 @@ const Sensor = ({ x, y, z, id, name, info }) => {
   const downloadFile = async (id, info) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/sensor/download/${id}`,
+        `https://sensor-building-vibration-monitor.vercel.app/sensor/download/${id}`,
         {
           method: "GET",
         }
