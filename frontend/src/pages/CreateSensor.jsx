@@ -20,7 +20,30 @@ const CreateSensor = () => {
       return setInfo("please fill in those fields!");
     setIsLoading(true);
 
-    try {
+    // try {
+    //   const response = await axios.post(
+    //     "https://sensor-building-vibration-monitor.vercel.app/create",
+    //     data
+    //   );
+
+    //   setTimeout(() => {
+    //     setIsLoading(false);
+    //     setInfo(response.data.message);
+    //   }, 500);
+
+    //   console.log(info);
+    // } catch (error) {
+    //   console.error("Error:", error);
+    //   setInfo(error.message);
+    // } finally {
+    //   setTimeout(() => {
+    //     setIsLoading(false);
+    //     setData({});
+    //   }, 500);
+    // }
+
+
+     try {
       const response = await axios.post(
         "https://sensor-building-vibration-monitor.vercel.app/create",
         data
