@@ -22,7 +22,7 @@ const CreateSensor = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/sensor/create",
+        "https://sensor-building-vibration-monitor.vercel.app/create",
         data
       );
 
