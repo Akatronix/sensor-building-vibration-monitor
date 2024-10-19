@@ -38,6 +38,7 @@ const CreateSensor = () => {
     } finally {
       setTimeout(() => {
         setIsLoading(false);
+        setData({});
       }, 500);
     }
   };
