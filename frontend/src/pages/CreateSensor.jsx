@@ -20,6 +20,34 @@ const CreateSensor = () => {
       return setInfo("please fill in those fields!");
     setIsLoading(true);
 
+    try {
+  const response = await fetch("https://sensor-building-vibration-monitor.vercel.app/create", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  const result = await response.json();
+
+  setTimeout(() => {
+    setIsLoading(false);
+    setInfo(result.message);
+  }, 500);
+
+  console.log(info);
+} catch (error) {
+  console.error("Error:", error);
+  setInfo(error.message || "An error occurred");
+} finally {
+  setTimeout(() => {
+    setIsLoading(false);
+    setData({});
+  }, 500);
+}
+
+
     // try {
     //   const response = await axios.post(
     //     "https://sensor-building-vibration-monitor.vercel.app/create",
@@ -41,29 +69,6 @@ const CreateSensor = () => {
     //     setData({});
     //   }, 500);
     // }
-
-
-     try {
-      const response = await axios.post(
-        "https://sensor-building-vibration-monitor.vercel.app/create",
-        data
-      );
-
-      setTimeout(() => {
-        setIsLoading(false);
-        setInfo(response.data.message);
-      }, 500);
-
-      console.log(info);
-    } catch (error) {
-      console.error("Error:", error);
-      setInfo(error.message);
-    } finally {
-      setTimeout(() => {
-        setIsLoading(false);
-        setData({});
-      }, 500);
-    }
   };
   return (
     <div className="w-full flex-1 h-[80vh] py-6">
