@@ -8,7 +8,7 @@ const SensorBox = () => {
   useEffect(() => {
     async function getData() {
       try {
-        const response = await fetch("http://localhost:3000/sensor");
+        const response = await fetch("https://sensor-building-vibration-monitor.vercel.app/sensor");
         const json = await response.json();
         setMyValues(json.data);
       } catch (error) {
