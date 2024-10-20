@@ -57,7 +57,7 @@ async function CreateSensor(req, res) {
 
 //  update sensor
 async function UpdateSensor(req, res) {
-  const filePath = path.join(__dirname, "..", "holder", "example.txt");
+
   try {
     const sensorID = req.params.id;
     const { x, y, z } = req.body;
@@ -70,12 +70,15 @@ async function UpdateSensor(req, res) {
       { new: true }
     );
 
+    const filePath = path.join(__dirname, "..", "holder", data.info);
     if (!data) return res.status(404).send({ message: "sensor is not found!" });
     const success = await log(filePath, {
       ...req.body,
       id: sensorID,
       name: data.name,
     });
+
+      
     res
       .status(200)
       .send({ message: "updated sucessfully...", data: data, sucess: success });
