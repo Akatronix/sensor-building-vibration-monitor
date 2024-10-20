@@ -108,7 +108,7 @@ async function getSingleSensor(req, res) {
 
 // delete sensor
 async function deleteSensor(req, res) {
-  const filePath = path.join(__dirname, "..", "holder", "example.txt");
+
   try {
     const dataID = req.params.id;
     if (!dataID) return res.status(404).send({ message: "id required!" });
@@ -116,6 +116,8 @@ async function deleteSensor(req, res) {
     const data = await SensorModel.findByIdAndDelete(dataID);
     if (!data) return res.status(404).send({ message: "sensor is not found!" });
     await data.delete;
+
+    const filePath = path.join(__dirname, "..", "holder", data.info);
 
     // fs.unlink(path.join(__dirname, "..", "holder", data.info), (err) => {
     //   if (err) {
