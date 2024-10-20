@@ -5,21 +5,24 @@ const moment = require("moment");
 
 async function Logger(file, data) {
   const DateTime = moment().format("YYYY-MM-DD\t\tHH:mm:ss");
-  const { x, y, z, id } = data;
-  const filename = file.split(".")[0];
-  const message = `${filename}\t\tx:${x}  y:${y}  z:${z}\t\t${DateTime}\t\t${id}\n`;
+  const { x, y, z, id, name } = data;
+  const message = `Name: ${name}\t\tData x:${x}  y:${y}  z:${z}\t\t Date: ${DateTime}\t\t ID: ${id}\n`;
+  const success = { found: false, created: false };
 
   try {
-    if (!fs.existsSync(path.join(__dirname, "..", "holder"))) {
-      await fsPromise.mkdir(path.join(__dirname, "..", "holder"));
-    }
-    await fsPromise.appendFile(
-      path.join(__dirname, "..", "holder", file),
-      message
-    );
+    // if (!fs.existsSync(file)) {
+    //   await fsPromise.mkdir(path.join(__dirname, "..", "holder"));
+    //   success.created = true;
+    //   success.found = false;
+    // }
+    await fsPromise.appendFile(path.join(file), message);
+    success.created = false;
+    success.found = true;
   } catch (error) {
     console.log(error);
   }
+
+  return success;
 }
 
 module.exports = Logger;

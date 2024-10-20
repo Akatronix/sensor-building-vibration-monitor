@@ -57,6 +57,7 @@ async function CreateSensor(req, res) {
 
 //  update sensor
 async function UpdateSensor(req, res) {
+  const filePath = path.join(__dirname, "..", "holder", "example.txt");
   try {
     const sensorID = req.params.id;
     const { x, y, z } = req.body;
@@ -70,8 +71,14 @@ async function UpdateSensor(req, res) {
     );
 
     if (!data) return res.status(404).send({ message: "sensor is not found!" });
-    await log(data.info, { ...req.body, id: sensorID });
-    res.status(200).send({ message: "updated sucessfully...", data: data });
+    const success = await log(filePath, {
+      ...req.body,
+      id: sensorID,
+      name: data.name,
+    });
+    res
+      .status(200)
+      .send({ message: "updated sucessfully...", data: data, sucess: success });
   } catch (error) {
     console.error("error updating sensor data", error);
     res.status(500).send({ message: "error updating sensor data" });
@@ -98,6 +105,7 @@ async function getSingleSensor(req, res) {
 
 // delete sensor
 async function deleteSensor(req, res) {
+  const filePath = path.join(__dirname, "..", "holder", "example.txt");
   try {
     const dataID = req.params.id;
     if (!dataID) return res.status(404).send({ message: "id required!" });
@@ -106,14 +114,21 @@ async function deleteSensor(req, res) {
     if (!data) return res.status(404).send({ message: "sensor is not found!" });
     await data.delete;
 
-    fs.unlink(path.join(__dirname, "..", "holder", data.info), (err) => {
-      if (err) {
-        console.error("Error deleting file:", err);
-        return;
-      }
-      console.log("File deleted successfully");
-    });
+    // fs.unlink(path.join(__dirname, "..", "holder", data.info), (err) => {
+    //   if (err) {
+    //     console.error("Error deleting file:", err);
+    //     return;
+    //   }
+    //   console.log("File deleted successfully");
+    // });
 
+    fs.truncate(filePath, 0, (err) => {
+      if (err) {
+        console.error("Error clearing the file:", err);
+      } else {
+        console.log("File has been cleared.");
+      }
+    });
     res
       .status(200)
       .send({ message: "sensor deleted successfully...", data: data });
@@ -131,7 +146,7 @@ async function downloadFile(req, res) {
   if (!data) return res.status(404).send({ message: "sensor is not found!" });
   await data.delete;
 
-  const filePath = path.join(__dirname, "..", "holder", data.info);
+  const filePath = path.join(__dirname, "..", "holder", "example.txt");
 
   // Check if the file exists
   fs.access(filePath, fs.constants.F_OK, (err) => {
@@ -139,16 +154,24 @@ async function downloadFile(req, res) {
       return res.status(404).send("File not found");
     }
     // Send the file for download
-    res.download(filePath, data.info, (err) => {
+    res.download(filePath, (err) => {
       if (err) {
         console.log("Error while sending file:", err);
       }
-      fs.unlink(path.join(__dirname, "..", "holder", data.info), (err) => {
+      // fs.unlink(filePath, (err) => {
+      //   if (err) {
+      //     console.error("Error deleting file:", err);
+      //     return;
+      //   }
+      //   console.log("File deleted successfully");
+      // });
+
+      fs.truncate(filePath, 0, (err) => {
         if (err) {
-          console.error("Error deleting file:", err);
-          return;
+          console.error("Error clearing the file:", err);
+        } else {
+          console.log("File has been cleared.");
         }
-        console.log("File deleted successfully");
       });
     });
   });
