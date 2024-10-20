@@ -119,21 +119,21 @@ async function deleteSensor(req, res) {
 
     const filePath = path.join(__dirname, "..", "holder", data.info);
 
-    // fs.unlink(path.join(__dirname, "..", "holder", data.info), (err) => {
-    //   if (err) {
-    //     console.error("Error deleting file:", err);
-    //     return;
-    //   }
-    //   console.log("File deleted successfully");
-    // });
-
-    fs.truncate(filePath, 0, (err) => {
+    fs.unlink(path.join(__dirname, "..", "holder", data.info), (err) => {
       if (err) {
-        console.error("Error clearing the file:", err);
-      } else {
-        console.log("File has been cleared.");
+        console.error("Error deleting file:", err);
+        return;
       }
+      console.log("File deleted successfully");
     });
+
+    // fs.truncate(filePath, 0, (err) => {
+    //   if (err) {
+    //     console.error("Error clearing the file:", err);
+    //   } else {
+    //     console.log("File has been cleared.");
+    //   }
+    // });
     res
       .status(200)
       .send({ message: "sensor deleted successfully...", data: data });
