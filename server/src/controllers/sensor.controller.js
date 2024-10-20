@@ -149,7 +149,7 @@ async function downloadFile(req, res) {
   if (!data) return res.status(404).send({ message: "sensor is not found!" });
   await data.delete;
 
-  const filePath = path.join(__dirname, "..", "holder", "example.txt");
+  const filePath = path.join(__dirname, "..", "holder", data.info);
 
   // Check if the file exists
   fs.access(filePath, fs.constants.F_OK, (err) => {
