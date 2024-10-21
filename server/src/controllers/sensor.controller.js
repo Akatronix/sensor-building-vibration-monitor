@@ -81,7 +81,7 @@ async function UpdateSensor(req, res) {
     );
 
     if (!data) return res.status(404).send({ message: "sensor is not found!" });
-    await log(data.info, { ...req.body, id: sensorID, name: data.name });
+    // await log(data.info, { ...req.body, id: sensorID, name: data.name });
     res.status(200).send({ message: "updated sucessfully...", data: data });
   } catch (error) {
     console.error("error updating sensor data", error);
