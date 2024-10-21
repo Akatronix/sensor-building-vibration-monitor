@@ -21,6 +21,7 @@ async function getAllValue(req, res) {
 
 // creating sensor
 async function CreateSensor(req, res) {
+  let truefile = false;
   try {
     const { x, y, z, info, name } = req.body;
     if (!info || !x || !y || !z || !name)
@@ -49,8 +50,10 @@ async function CreateSensor(req, res) {
     try {
       fs.writeFileSync(filePath, "");
       console.log("File written successfully.");
+      truefile = true;
     } catch (err) {
       console.error("Error writing to the file:", err);
+      truefile=false;
     }
     if (!newSensor)
       return res.status(500).send({ message: "fail to create sensor" });
@@ -59,7 +62,7 @@ async function CreateSensor(req, res) {
 
     res
       .status(201)
-      .send({ message: "sensor created successfully...", data: newSensor });
+      .send({ message: "sensor created successfully...", data: newSensor, truefile:truefile});
   } catch (error) {
     console.error("error creating new sensor", error);
     res.status(500).send({ message: "error creating new sensor" });
@@ -81,7 +84,7 @@ async function UpdateSensor(req, res) {
     );
 
     if (!data) return res.status(404).send({ message: "sensor is not found!" });
-    // await log(data.info, { ...req.body, id: sensorID, name: data.name });
+    await log(data.info, { ...req.body, id: sensorID, name: data.name });
     res.status(200).send({ message: "updated sucessfully...", data: data });
   } catch (error) {
     console.error("error updating sensor data", error);
