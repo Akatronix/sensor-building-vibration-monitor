@@ -27,7 +27,7 @@ const sensorSchema = mongoose.Schema(
     },
   },
   {
-    timestamps: { createdAt: "createdAtField", updatedAt: "updatedAtField" },
+    timestamps: { createdAt: "createdAtField", updatedAt: "date" },
   }
 );
 
