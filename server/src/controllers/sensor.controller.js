@@ -2,6 +2,18 @@ const SensorModel = require("../models/sensor.model");
 const log = require("../middlewares/logger");
 const fs = require("fs");
 const path = require("path");
+const now = new Date();
+
+const year = now.getFullYear();
+const month = now.getMonth() + 1; 
+const day = now.getDate();
+const hours = now.getHours();
+const minutes = now.getMinutes();
+const seconds = now.getSeconds();
+
+const date = `Date: ${day}/${month}/${year}`);
+const time = `Time: ${hours}:${minutes}:${seconds}`);
+
 
 async function getAllValue(req, res) {
   try {
@@ -12,6 +24,8 @@ async function getAllValue(req, res) {
     res.status(200).send({
       message: "all sensor values",
       data: data,
+      time: time,
+      date:date
     });
   } catch (error) {
     console.error("error getting sensors datas", error);
