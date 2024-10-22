@@ -7,6 +7,8 @@ const path = require("path");
  
 async function getAllValue(req, res) {
   const now = new Date();
+  date = now.toLocaleDateString();
+  time = now.toLocaleTimeString();
   try {
     const data = await SensorModel.find();
 
@@ -15,8 +17,8 @@ async function getAllValue(req, res) {
     res.status(200).send({
       message: "all sensor values",
       data: data,
-      time: now.toLocaleTimeString(),
-      date:now.toLocaleDateString(),
+      time: time,
+      date: date,
     });
   } catch (error) {
     console.error("error getting sensors datas", error);
