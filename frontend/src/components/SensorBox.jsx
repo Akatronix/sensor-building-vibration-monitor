@@ -33,7 +33,7 @@ const SensorBox = () => {
             key={index}
             name={value.name}
             info={value.info}
-            date={value.date}
+            mydate={value.date}
           />
         ))}
       </div>
