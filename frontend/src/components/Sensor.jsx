@@ -59,6 +59,7 @@ const Sensor = ({ x, y, z, id, name, info, date }) => {
         </div>
       </div>
       <p className="md:text-sm text-lg text-gray-500 my-4">ID: {id}</p>
+      <p className="md:text-sm text-lg text-gray-500 my-4" >Date: {date}</p>
       <div className="w-full flex items-center justify-between px-3">
         <MdDelete
           className="text-5xl md:text-2xl text-gray-500 hover:text-red-500 cursor-pointer"
@@ -68,7 +69,7 @@ const Sensor = ({ x, y, z, id, name, info, date }) => {
           className="text-5xl md:text-3xl text-gray-500 hover:text-black cursor-pointer"
           onClick={() => downloadFile(id, info)}
         /> */}
-        <p>{date}</p>
+      
       </div>
     </div>
   );
