@@ -15,24 +15,24 @@ const Sensor = ({ x, y, z, id, name, info, mydate }) => {
 // // Format the time as HH:MM:SS
 // const time24HourFormat = `${hours}:${minutes}:${seconds}`;
 
+  // const date = new Date(mydate);
+  // const update = date.toString()
+
+
   const date = new Date(mydate);
-  const update = date.toString()
+const options = {
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+  hour: "2-digit",
+  minute: "2-digit",
+  second: "2-digit",
+  hour12: false,
+  timeZone: "UTC"  // Adjusts to UTC timezone
+};
 
-
-//   const date = new Date(mydate);
-// const options = {
-//   year: "numeric",
-//   month: "2-digit",
-//   day: "2-digit",
-//   hour: "2-digit",
-//   minute: "2-digit",
-//   second: "2-digit",
-//   hour12: false,
-//   timeZone: "UTC"  // Adjusts to UTC timezone
-// };
-
-// const formattedDate = new Intl.DateTimeFormat("en-GB", options).format(date);
-// // console.log(formattedDate); // "25/10/2024, 14:04:51"
+const formattedDate = new Intl.DateTimeFormat("en-GB", options).format(date);
+// console.log(formattedDate); // "25/10/2024, 14:04:51"
 
   
   async function deleteSensor(id) {
@@ -91,7 +91,7 @@ const Sensor = ({ x, y, z, id, name, info, mydate }) => {
         </div>
       </div>
       <p className="md:text-sm text-lg text-gray-500 my-4">ID: {id}</p>
-      <p className="md:text-sm text-lg text-gray-500 my-4" >Time: {update}</p>
+      <p className="md:text-sm text-lg text-gray-500 my-4" >Date and Time: {formattedDate}</p>
       <div className="w-full flex items-center justify-between px-3">
         <MdDelete
           className="text-5xl md:text-2xl text-gray-500 hover:text-red-500 cursor-pointer"
