@@ -4,16 +4,19 @@ import { HiFolderDownload } from "react-icons/hi";
 
 const Sensor = ({ x, y, z, id, name, info, mydate }) => {
 
-const timestamp = mydate;
-const date = new Date(timestamp);
+// const timestamp = mydate;
+// const date = new Date(timestamp);
 
-// Extract hours, minutes, and seconds
-const hours = date.getHours().toString().padStart(2, '0');
-const minutes = date.getMinutes().toString().padStart(2, '0');
-const seconds = date.getSeconds().toString().padStart(2, '0');
+// // Extract hours, minutes, and seconds
+// const hours = date.getHours().toString().padStart(2, '0');
+// const minutes = date.getMinutes().toString().padStart(2, '0');
+// const seconds = date.getSeconds().toString().padStart(2, '0');
 
-// Format the time as HH:MM:SS
-const time24HourFormat = `${hours}:${minutes}:${seconds}`;
+// // Format the time as HH:MM:SS
+// const time24HourFormat = `${hours}:${minutes}:${seconds}`;
+
+  const date = new Date(mydate);
+  const update = date.toString()
 
   
   async function deleteSensor(id) {
@@ -72,7 +75,7 @@ const time24HourFormat = `${hours}:${minutes}:${seconds}`;
         </div>
       </div>
       <p className="md:text-sm text-lg text-gray-500 my-4">ID: {id}</p>
-      <p className="md:text-sm text-lg text-gray-500 my-4" >Date: {time24HourFormat}</p>
+      <p className="md:text-sm text-lg text-gray-500 my-4" >Date: {update}</p>
       <div className="w-full flex items-center justify-between px-3">
         <MdDelete
           className="text-5xl md:text-2xl text-gray-500 hover:text-red-500 cursor-pointer"
