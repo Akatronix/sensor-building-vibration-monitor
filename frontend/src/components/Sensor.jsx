@@ -2,7 +2,7 @@ import axios from "axios";
 import { MdDelete } from "react-icons/md";
 import { HiFolderDownload } from "react-icons/hi";
 
-const Sensor = ({ x, y, z, id, name, info }) => {
+const Sensor = ({ x, y, z, id, name, info, date }) => {
   async function deleteSensor(id) {
     try {
       await axios.delete(`https://sensor-building-vibration-monitor.vercel.app/sensor/delete/${id}`);
@@ -64,10 +64,11 @@ const Sensor = ({ x, y, z, id, name, info }) => {
           className="text-5xl md:text-2xl text-gray-500 hover:text-red-500 cursor-pointer"
           onClick={() => deleteSensor(id)}
         />
-        <HiFolderDownload
+{/*         <HiFolderDownload
           className="text-5xl md:text-3xl text-gray-500 hover:text-black cursor-pointer"
           onClick={() => downloadFile(id, info)}
-        />
+        /> */}
+        <p>{date}</p>
       </div>
     </div>
   );
