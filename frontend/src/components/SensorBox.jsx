@@ -16,7 +16,7 @@ const SensorBox = () => {
       }
     }
 
-    const intervalId = setInterval(getData, 200);
+    const intervalId = setInterval(getData, 1000);
 
     return () => clearInterval(intervalId);
   }, []);
